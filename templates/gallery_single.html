@@ -1,0 +1,133 @@
+{% include 'base.html' %}
+
+{% block css %}
+	<style>
+		/*body { margin: 0; }
+		canvas { width: 50%; height: 50% }*/
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+    	<h1>Open Single .obj file to this Page!</h1>
+    </div>
+    <div id="container"></div>
+{% endblock %}
+
+{% block js %}
+	<script src="/static/js/three_render/three.min.js"></script>
+	<script src="/static/js/three_render/OBJLoader.js"></script>
+	<script src="/static/js/three_render/Detector.js"></script>
+	<script src="/static/js/three_render/DragControls.js"></script>
+	<script src="/static/js/three_render/OrbitControls.js"></script>
+	<script src="/static/js/three_render/TransformControls.js"></script>
+
+	<script src="/static/js/three_render/stats.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var container, stats;
+
+	        var camera, scene, renderer;
+
+
+
+	        init();
+	        animate();
+
+
+	        function init() {
+
+	        	// var json_file = JSON.parse({{obj_one.coordinates}});
+
+	            var container = document.getElementById('container');
+
+	            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+	            // camera.position.z = json_file.camera_pos || 200;
+	            camera.position.z = 300;
+
+
+
+	            // scene
+
+	            scene = new THREE.Scene();
+
+	            var ambient = new THREE.AmbientLight( 0x404040 );
+	            scene.add( ambient );
+
+	            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            directionalLight.position.set( 10, 3, 0 ).normalize();
+	            scene.add( directionalLight );
+
+	            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            directionalLight.position.set( -100, 3, 0 ).normalize();
+	            scene.add( directionalLight );
+
+	            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            directionalLight.position.set( 3, 100, 10 ).normalize();
+	            scene.add( directionalLight );
+
+	             var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            directionalLight.position.set( 5, -5, 0 ).normalize();
+	            scene.add( directionalLight );
+
+	            // model
+
+
+	            var loader = new THREE.OBJLoader();
+	            loader.load( "/media/{{obj_one.obj_file}}", function ( object ) {
+	            	scene.add( object );
+	            } );
+
+	            //
+
+	            renderer = new THREE.WebGLRenderer();
+	            renderer.setSize( window.innerWidth, window.innerHeight );
+	            container.appendChild( renderer.domElement );
+
+
+
+	            // var pos_x = json_file.camera_pos || 0;
+	            // var pos_y = json_file.camera_pos || 0;
+	            // var pos_z = json_file.camera_pos || 0;
+	            controls = new THREE.OrbitControls( camera, renderer.domElement );
+	            controls.target.set(0, 0, 0);
+	            // controls.target.set(pos_x, pos_x, pos_x);
+
+	            //
+
+	            window.addEventListener( 'resize', onWindowResize, false );
+
+	        }
+
+	        function onWindowResize() {
+
+	            camera.aspect = window.innerWidth / window.innerHeight;
+	            camera.updateProjectionMatrix();
+
+	            renderer.setSize( window.innerWidth, window.innerHeight );
+
+	        }
+
+	        //
+
+	        function animate() {
+
+	            requestAnimationFrame( animate );
+
+	            controls.update();
+
+	            render();
+
+	        }
+
+	        function render() {
+
+
+
+	            renderer.render( scene, camera );
+
+	        }
+		});
+	</script>
+{% endblock %}

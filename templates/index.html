@@ -1,0 +1,227 @@
+{% include 'base.html' %}
+
+{% block css %}
+  <!-- <link rel="stylesheet" href="/static/css/example.css"> -->
+  <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+  <style type="text/css">
+    body {
+      -webkit-font-smoothing: antialiased;
+      font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      /*color: #232525;*/
+      /*padding-top:70px;*/
+    }
+
+    #slides {
+      display: none
+    }
+
+    #slides .slidesjs-navigation {
+      margin-top:0px;
+    }
+
+    a.slidesjs-next,
+    a.slidesjs-previous,
+    a.slidesjs-play,
+    a.slidesjs-stop {
+      background-image: url(/static/img/btns-next-prev.png);
+      background-repeat: no-repeat;
+      display:block;
+      width:12px;
+      height:18px;
+      overflow: hidden;
+      text-indent: -9999px;
+      float: left;
+      margin-right:5px;
+    }
+
+    a.slidesjs-next {
+      margin-right:10px;
+      background-position: -12px 0;
+    }
+
+    a:hover.slidesjs-next {
+      background-position: -12px -18px;
+    }
+
+    a.slidesjs-previous {
+      background-position: 0 0;
+    }
+
+    a:hover.slidesjs-previous {
+      background-position: 0 -18px;
+    }
+
+    a.slidesjs-play {
+      width:15px;
+      background-position: -25px 0;
+    }
+
+    a:hover.slidesjs-play {
+      background-position: -25px -18px;
+    }
+
+    a.slidesjs-stop {
+      width:18px;
+      background-position: -41px 0;
+    }
+
+    a:hover.slidesjs-stop {
+      background-position: -41px -18px;
+    }
+
+    .slidesjs-pagination {
+      margin: 7px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url(/static/img/pagination.png);
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    #slides a:link,
+    #slides a:visited {
+      color: #333
+    }
+
+    #slides a:hover,
+    #slides a:active {
+      color: #9e2020
+    }
+
+    .navbar {
+      overflow: hidden
+    }
+  </style>
+  <!-- End SlidesJS Optional-->
+  <!-- SlidesJS Required: These styles are required if you'd like a responsive slideshow -->
+  <style>
+    #slides {
+      display: none
+    }
+
+    .container {
+      margin: 0 auto
+    }
+
+    /* For tablets & smart phones */
+    @media (max-width: 767px) {
+      body {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smartphones */
+    @media (max-width: 480px) {
+      .container {
+        width: auto
+      }
+    }
+
+    /* For smaller displays like laptops */
+    @media (min-width: 768px) and (max-width: 979px) {
+      .container {
+        width: 724px
+      }
+    }
+
+    /* For larger displays */
+    @media (min-width: 1200px) {
+      .container {
+        width: 1170px
+      }
+    }
+  </style>
+  <!-- SlidesJS Required: -->
+  <style type="text/css">
+    .btn-warning {
+      color: blue;
+      font-size: 20px;
+    }
+    .btn-info {
+      color: blue;
+      font-size: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Render Your OBJ File </h1>
+    <div id="slides">
+      <img src="/static/img/intro_image/1.PNG">
+      <img src="/static/img/intro_image/2.jpg">
+      <img src="/static/img/intro_image/3.gif">
+      <img src="/static/img/intro_image/4.jpg">
+      <img src="/static/img/intro_image/5.jpg">
+      <img src="/static/img/intro_image/6.jpg">
+      <img src="/static/img/intro_image/7.jpg">
+    </div>
+    <br>
+    <div style="background-color:rgba(68,120,89,0.5);">
+      <div class="container" style="padding-top:20px;font-size:20px;">
+        <p><strong>"</strong>Animation can explain whatever the mind of man can conceive. This facility makes it the most versatile and explicit means of communication yet devised for quick mass appreciation.<strong>"</strong></p>
+        <div class="pull-right" style="padding-right:50px;">
+          <p><i><strong>Walt Disney</strong></i></p>
+        </div>
+
+        <div class="container" style="padding-right:75px;">
+          <div class="btn-group btn-group-justified" role="group" aria-label="">
+            <div class="btn-group" role="group">
+              <a class="btn btn-warning" href="/upload">Upload</a>
+            </div>
+            <div class="btn-group" role="group">
+              <a class="btn btn-info" href="/gallery">Gallery</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br>
+    </div>
+  </div>
+  <br>
+{% endblock %}
+
+{% block js %}
+  <script src="/static/js/jquery.slides.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $("#slides").slidesjs({
+        width: 940,
+        height: 528,
+        play: {
+          active: true,
+          auto: true,
+          interval: 4000,
+          swap: true
+        }
+      });
+    })
+  </script>
+{% endblock %}

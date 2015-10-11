@@ -1,0 +1,1 @@
+web: gunicorn cloudqube.wsgi --log-file -

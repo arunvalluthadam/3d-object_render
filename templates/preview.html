@@ -1,0 +1,176 @@
+{% include 'base.html' %}
+
+{% block css %}
+	<style>
+		body {
+			/*font-family: Monospace;
+			background-color: #000;
+			color: #fff;
+			margin: 0px;
+			overflow: hidden;*/
+		}
+		#info {
+			color: #fff;
+			position: absolute;
+			top: 10px;
+			width: 100%;
+			text-align: center;
+			z-index: 100;
+			display:block;
+		}
+		#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+    	<h1>This is Preview Page!</h1>
+    	<div>
+    		<h3>{{last_one.title}}</h3>
+    		<p>
+    			Last Object File For Preview :
+    			<strong><a href="#">{{last_one.obj_file}}</a></strong>
+    		</p>
+    	</div>
+    </div>
+
+	<div id="container"></div>
+
+	<div class="container">
+    	<!-- <button class="btn btn-danger" onclick="save()">Save</button> -->
+    	<a class="btn btn-danger" onclick="save()" href="/gallery">Save</a>
+    </div>
+    
+{% endblock %}
+
+{% block js %}
+	<script src="/static/js/three_render/three.min.js"></script>
+	<script src="/static/js/three_render/OBJLoader.js"></script>
+    <script src="/static/js/three_render/Detector.js"></script>
+    <script src="/static/js/three_render/DragControls.js"></script>
+    <script src="/static/js/three_render/OrbitControls.js"></script>
+    <script src="/static/js/three_render/TrackballControls.js"></script>
+
+    <script src="/static/js/three_render/stats.min.js"></script>
+
+	<script type="text/javascript">
+		var container, stats;
+
+        var camera, scene, renderer;
+
+        var coorninates = {};
+
+
+
+        init();
+        animate();
+
+
+        function init() {
+
+            var container = document.getElementById('container');
+
+            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+            camera.position.z = 1200;
+            coorninates.camera_pos = 1200;
+            // scene
+
+            scene = new THREE.Scene();
+
+            var ambient = new THREE.AmbientLight( 0x404040 ); // 0x101030
+            scene.add( ambient );
+
+            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+            directionalLight.position.set( 10, 3, 0 ).normalize();
+            scene.add( directionalLight );
+
+            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+            directionalLight.position.set( -100, 3, 0 ).normalize();
+            scene.add( directionalLight );
+
+            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+            directionalLight.position.set( 3, 100, 10 ).normalize();
+            scene.add( directionalLight );
+
+             var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+            directionalLight.position.set( 5, -5, 0 ).normalize();
+            scene.add( directionalLight );
+
+
+            // model
+
+            // var obj_pos
+            var loader = new THREE.OBJLoader();
+            loader.load( "/media/{{last_one.obj_file}}", function ( object ) {
+            	scene.add( object );
+            	// scene.updateMatrixWorld(true);
+	            // var position = new THREE.Vector3();
+	            // position.getPositionFromMatrix(object.matrixWorld);
+	            // alert(position.x + ', ' + position.y + ', ' + position.z);
+            } );
+
+
+            //
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            container.appendChild( renderer.domElement );
+
+
+            //
+
+            controls = new THREE.OrbitControls( camera, renderer.domElement );
+            controls.target.set(0, 400, 0);
+            coorninates.cod_x = 0;
+            coorninates.cod_y = 400;
+            coorninates.cod_z = 0;
+
+            // coorninates.cod_x = 200;
+            // coorninates.cod_x = 200;
+            // coorninates.cod_x = -100;
+
+            console.log(JSON.stringify(coorninates));
+            window.addEventListener( 'resize', onWindowResize, false );
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+
+        //
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+
+            controls.update();
+            
+            render();
+
+        }
+
+        function render() {
+
+
+            renderer.render( scene, camera );
+
+        }
+
+	</script>
+
+
+	<script>
+		function save() {
+			alert(JSON.stringify(coorninates));
+			$.post("/preview/", {'whole_data': JSON.stringify(coorninates)});
+			alert("Content Saved !!!");
+		}
+		
+	</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% include 'base.html' %}
+
+{% block css %}
+	<link href="/static/css/fileinput.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1>Upload Your 3D Model</h1>
+		<form action="/upload/" method="post" enctype="multipart/form-data">{% csrf_token %}
+			<br>
+			<label class="control-label">Enter a Name for Object</label>
+			{{obj_form.title}}
+			<br>
+			<label class="control-label">Upload Your OBJ file</label>
+			{{obj_form.obj_file}}
+			<br>
+			<input class="btn btn-primary" type="submit" value="Preview">
+		</form>
+
+		
+
+		<!-- <a class="btn btn-info" href="#">Callback </a> -->
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script src="/static/js/fileinput.min.js"></script>
+    <script>
+      $(document).on('ready', function() {
+        $("#input-20").fileinput({
+          browseClass: "btn btn-primary btn-block",
+          showCaption: false,
+          showRemove: false,
+          showUpload: false
+        });
+      });
+    </script>
+{% endblock %}

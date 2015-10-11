@@ -1,0 +1,28 @@
+{% include 'base.html' %}
+
+{% block content %}
+	<div class="container">
+    	<h1>Gallery</h1>
+
+    	<div class="row">
+			<!--<div class="col-xs-6 col-md-3">
+				<a href="#" class="thumbnail">
+					<div class="gallery-thumbnail">
+						<h3 class="gallery-text">Model 6</h3>
+					</div>
+				</a>
+			</div> -->
+			{% for obj in obj_file %}
+				<div class="col-xs-6 col-md-3">
+					<a href="{% url 'gallery_single' obj.id %}" class="thumbnail">
+						<div class="gallery-thumbnail">
+							<h3 class="gallery-text">{{obj.title}}</h3>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+
+		</div>
+
+    </div>
+{% endblock %}
