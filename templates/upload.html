@@ -11,6 +11,12 @@
 			<br>
 			<label class="control-label">Enter a Name for Object</label>
 			{{obj_form.title}}
+			<!-- <br>
+			<label class="control-label">Upload a sample image file (Optional)</label>
+			{{obj_form.cover_photo}}
+			<br>
+			<label class="control-label">Upload Your Texture Image (Optional)</label>
+			{{obj_form.texture}} -->
 			<br>
 			<label class="control-label">Upload Your OBJ file</label>
 			{{obj_form.obj_file}}
@@ -28,7 +34,19 @@
 	<script src="/static/js/fileinput.min.js"></script>
     <script>
       $(document).on('ready', function() {
-        $("#input-20").fileinput({
+        // $("#input-20").fileinput({
+        //   browseClass: "btn btn-primary btn-block",
+        //   showCaption: false,
+        //   showRemove: false,
+        //   showUpload: false
+        // });
+        // $("#input-21").fileinput({
+        //   browseClass: "btn btn-primary btn-block",
+        //   showCaption: false,
+        //   showRemove: false,
+        //   showUpload: false
+        // });
+        $("#input-22").fileinput({
           browseClass: "btn btn-primary btn-block",
           showCaption: false,
           showRemove: false,
