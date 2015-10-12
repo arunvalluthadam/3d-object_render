@@ -9,7 +9,10 @@
 
 {% block content %}
 	<div class="container">
-    	<h1>Open Single .obj file to this Page!</h1>
+		<br>
+    	<!-- <h1>Open Single .obj file to this Page!</h1> -->
+    	<h3>"W" translate | "E" rotate | "R" scale | "+" increase size | "-" decrease size<!-- <br />
+		Press "Q" to toggle world/local space --></h3>
     </div>
     <div id="container"></div>
 {% endblock %}
@@ -42,9 +45,10 @@
 
 	            var container = document.getElementById('container');
 
-	            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+	            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 200000 );
 	            // camera.position.z = json_file.camera_pos || 200;
-	            camera.position.z = 300;
+	            // camera.position.z = 600;
+	            camera.position.set( 1100, 1100, 1000 );
 
 
 
@@ -55,28 +59,89 @@
 	            var ambient = new THREE.AmbientLight( 0x404040 );
 	            scene.add( ambient );
 
+	            // light from left side of the object
 	            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-	            directionalLight.position.set( 10, 3, 0 ).normalize();
+	            directionalLight.position.set( 2000, 0, 0 ).normalize();
 	            scene.add( directionalLight );
 
+	            // light from right side of the object
 	            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-	            directionalLight.position.set( -100, 3, 0 ).normalize();
+	            directionalLight.position.set( -1000, 0, 0 ).normalize();
 	            scene.add( directionalLight );
 
-	            var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-	            directionalLight.position.set( 3, 100, 10 ).normalize();
-	            scene.add( directionalLight );
+	            // // light from top of the object
+	            // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( 0, 1000, 0 ).normalize();
+	            // scene.add( directionalLight );
 
-	             var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-	            directionalLight.position.set( 5, -5, 0 ).normalize();
-	            scene.add( directionalLight );
+	            // // light from bottom of the object
+	            //  var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( 0, -1000, 0 ).normalize();
+	            // scene.add( directionalLight );
+
+	            // // light from back side of the object
+	            // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( 0, 0, -1000 ).normalize();
+	            // scene.add( directionalLight );
+
+	            // // light from front side of the object
+	            // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( 0, 0, 1000 ).normalize();
+	            // scene.add( directionalLight );
+
+	            // // light from front side of the object
+	            // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( 0, 0, 1000 ).normalize();
+	            // scene.add( directionalLight );
+
+// ------------------------------------------------------------------------------
+
+	            // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( 100, 100, 0 ).normalize();
+	            // scene.add( directionalLight );
+
+	            // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	            // directionalLight.position.set( -100, 100, 0 ).normalize();
+	            // scene.add( directionalLight );
+
+// ------------------------------------------------------------------------------
 
 	            // model
 
 
 	            var loader = new THREE.OBJLoader();
 	            loader.load( "/media/{{obj_one.obj_file}}", function ( object ) {
+	            	var control = new THREE.TransformControls(camera, renderer.domElement);
+	            	control.addEventListener('change', render);
 	            	scene.add( object );
+	            	control.attach(object);
+	            	scene.add(control);
+
+	            	window.addEventListener( 'keydown', function ( event ) {
+			            //console.log(event.which);
+			            switch ( event.keyCode ) {
+			              case 81: // Q
+			                control.setSpace( control.space == "local" ? "world" : "local" );
+			                break;
+			              case 87: // W
+			                control.setMode( "translate" );
+			                break;
+			              case 69: // E
+			                control.setMode( "rotate" );
+			                break;
+			              case 82: // R
+			                control.setMode( "scale" );
+			                break;
+						case 187:
+						case 107: // +,=,num+
+							control.setSize( control.size + 0.1 );
+							break;
+						case 189:
+						case 109: // -,_,num-
+							control.setSize( Math.max(control.size - 0.1, 0.1 ) );
+							break;
+			            }
+	        		});
 	            } );
 
 	            //
@@ -97,6 +162,9 @@
 	            //
 
 	            window.addEventListener( 'resize', onWindowResize, false );
+
+
+	            
 
 	        }
 
