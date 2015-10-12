@@ -98,10 +98,10 @@ WSGI_APPLICATION = 'cloudqube.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd5f4ub0svg5o9u',
-        'USER': 'wrqquxqotqrzjv',
-        'PASSWORD': 'bwBzUxOHSjcJNjKOlvWgf0P_cg',
-        'HOST': 'ec2-54-204-15-41.compute-1.amazonaws.com',
+        'NAME': 'd9iu79lfpdrcm6',
+        'USER': 'gzaajrmfpqboxo',
+        'PASSWORD': 'f0Gp9wCboXjEQUtIUzs5JcQqCg',
+        'HOST': 'ec2-54-227-253-238.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

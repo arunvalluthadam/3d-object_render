@@ -5,6 +5,7 @@ from django.template.defaultfilters import slugify
 class Objects(models.Model):
 	title = models.CharField(max_length=200, null=True, blank=True)
 	# slug = models.SlugField(unique=True, null=True, blank=True)
+	# cover_photo = models.ImageField(upload_to="cover_photo")
 	obj_file = models.FileField(upload_to="objectFile")
 	coordinates = models.CharField(max_length=500000, null=True, blank=True)
 
