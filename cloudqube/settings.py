@@ -83,13 +83,25 @@ WSGI_APPLICATION = 'cloudqube.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'cloudqube',
+#         'USER': 'postgres_simplans',
+#         'PASSWORD': 'josearun',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cloudqube',
-        'USER': 'postgres_simplans',
-        'PASSWORD': 'josearun',
-        'HOST': 'localhost',
+        'NAME': 'd5f4ub0svg5o9u',
+        'USER': 'vfenrfjtfdydox',
+        'PASSWORD': 'afeH6A2CEmbkd7iLJYiMXtOSlw',
+        'HOST': 'ec2-54-204-15-41.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
