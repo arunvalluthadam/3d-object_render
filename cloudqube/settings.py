@@ -83,28 +83,28 @@ WSGI_APPLICATION = 'cloudqube.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cloudqube',
-        'USER': 'postgres_simplans',
-        'PASSWORD': 'josearun',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'dci5ucscnq2g9b',
-#         'USER': 'fjwzxlpqccvgik',
-#         'PASSWORD': 'hUXsbYOHEyUm4Z_Jt-iHWSqRJ3',
-#         'HOST': 'ec2-54-83-20-177.compute-1.amazonaws.com',
+#         'NAME': 'cloudqube',
+#         'USER': 'postgres_simplans',
+#         'PASSWORD': 'josearun',
+#         'HOST': 'localhost',
 #         'PORT': '5432',
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'demmqeilgc5jss',
+        'USER': 'bzfllszzfojtmf',
+        'PASSWORD': 'bO4v-8U2mUpmb1TJhLD4E3KX1p',
+        'HOST': 'ec2-54-204-6-113.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
